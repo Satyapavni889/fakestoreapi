@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div style="background-color: rgb(193, 142, 75);"></div>
+
+    <script>
+
+        function fetchdata() {
+            data = fetch("https://fakestoreapi.com/products")
+            return data;
+        }
+        async function getfetchdata() {
+            data = await fetchdata()
+            res = await data.json()
+
+            for (i of res) {
+                dtag = document.createElement("details")
+
+
+                dtag.setAttribute("style", "border:2px solid black;border-radius:5px;margin-top:5px;padding:15px;background-color: rgb(193, 142, 75)")
+                title = document.createElement("summary")
+                // title.style.backgroundColor=" rgb(227, 153, 128)"
+                category = document.createElement("p")
+                image = document.createElement("img")
+                image.style.width = "100px"
+                price = document.createElement("h3")
+                rating = document.createElement("h3")
+
+                title.innerHTML = i.title
+                category.innerHTML = "category: " + i.category
+                image.src = i.image;
+                price.innerHTML = "Price: " + i.price;
+                rating.innerHTML = "Rating: " + i.rating.rate + "&#9733;"
+                dtag.appendChild(title)
+                dtag.appendChild(category)
+                dtag.appendChild(image)
+                dtag.appendChild(price)
+                dtag.appendChild(rating)
+                document.body.appendChild(dtag)
+            }
+        }
+        getfetchdata()
+
+    </script>
+   
+</body> 
+
+</html>
